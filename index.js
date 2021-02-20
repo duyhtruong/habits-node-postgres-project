@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const port = 3000
+const db = require('./queries')
 
 //body-parser simplifies request by parsing the raw request body and giving you req.body
 app.use(bodyParser.json())
@@ -20,5 +21,9 @@ app.listen(port,()=>{
   console.log(`App running on port ${port}.`)
 })
 
-
+app.get('/users', db.getUsers)
+app.get('/users/:id', db.getUserById)
+app.post('/users', db.createUsers)
+app.put('/users/:id', db.updateUser)
+app.delete('/users/:id', db.deleteUser)
 
