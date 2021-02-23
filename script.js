@@ -21,6 +21,29 @@ displayAllUsers();
 
 function addNewUser(){
     
+fetch("http://localhost:3000/users/",{
+    method: "POST",
+    headers:{
+        "Accept": "application/json",
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        name: "testing",
+        email: "testing@gmail.com"
+    })
+    .then(response=>{
+        if(response.ok){
+            return response.json();
+            
+        }
+    })
+    .catch(error=>{
+        console.error(error);
+    })
+})
+
+
+    
 }
 
 
