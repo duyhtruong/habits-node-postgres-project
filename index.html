@@ -16,7 +16,27 @@
 </head>
 <body>
     <h1>Users Example</h1>
+    <div>
+        <form>
+            <input>
+        </form>
+    </div>
     <div id='main-body'></div>
+    <button id="addBtn">Add New User</button>
+    <div id="addModal" class="addModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Add new user</p>
+            <form onsubmit="">
+                <label for="addFName">First Name:</label><br>
+                <input type="text" id="addFName" name="addFName"><br>
+                <label for="addEmail">Email:</label><br>
+                <input type="text" id="addEmail" name="addEmail"><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
