@@ -32,10 +32,7 @@ fetch("http://localhost:3000/users/",{
         email: "testing@gmail.com"
     })
 })
-    .then(response=>response.json()).then(data=>{console.log(data)})
-    .catch(error=>{
-        console.error(error);
-    })
+   
 
 }
 

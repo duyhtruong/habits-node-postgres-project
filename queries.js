@@ -9,11 +9,14 @@ const pool = new Pool({
 
 //GET all users
 const getUsers = (request, response) => {
-    pool.query('SELECT * FROM users ORDER BY id ASC', (error, results)=>{
+    pool.query('SELECT * FROM users ORDER BY id ASC', function (error, results){
         if (error){
-            throw error
+            throw error;
+        }else{
+            return response.send(results.rows);
         }
-        response.status(200).json(results.rows)
+        //return response.status(200).json(results.rows)
+        //return response.send({error: false, data: results});
     })
 }
 
@@ -30,7 +33,7 @@ const getUserById = (request, response) => {
 }
 
 //POST a new user
-const createUser = (request, response) => {
+/*const createUser = (request, response) => {
     const { name, email } = request.body
 
     pool.query('INSERT INTO users (name, email) VALUES ($1, $2)', [name, email], (error, results)=>{
@@ -38,6 +41,19 @@ const createUser = (request, response) => {
             throw error
         }
         response.status(201).send(`User added with ID: ${results.insertId}`)
+    })
+}*/
+
+const createUser = function (req, res) {
+    let name = req.body.name;
+    let email = req.body.email;
+
+    pool.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id', [name, email], function(error, results){
+        if(error){
+            throw error;
+        }else{
+            return res.send({message: `User added with ID: ${results.rows[0].id}`})
+        }
     })
 }
 
