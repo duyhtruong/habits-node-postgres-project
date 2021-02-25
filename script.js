@@ -31,19 +31,12 @@ fetch("http://localhost:3000/users/",{
         name: "testing",
         email: "testing@gmail.com"
     })
-    .then(response=>{
-        if(response.ok){
-            return response.json();
-            
-        }
-    })
+})
+    .then(response=>response.json()).then(data=>{console.log(data)})
     .catch(error=>{
         console.error(error);
     })
-})
 
-
-    
 }
 
 
