@@ -75,6 +75,7 @@ const updateUser = (request, response)=>{
 }
 
 //DELETE user
+/*
 const deleteUser = (request, response)=>{
     const id = parseInt(request.params.id)
 
@@ -83,6 +84,17 @@ const deleteUser = (request, response)=>{
             throw error
         }
         response.status(200).send(`User deleted with ID: ${id}`)
+    })
+}*/
+const deleteUser = function(req,res){
+    const id = parseInt(req.params.id)
+
+    pool.query('DELETE FROM users WHERE id = $1', [id], function(error, results){
+        if(error){
+            throw error;
+        }else{
+            return res.send(`User deleted with ID: ${id}`);
+        }
     })
 }
 

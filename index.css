@@ -1,3 +1,19 @@
+body{
+    font-family: 'Roboto';
+}
+
+.body--user-card{
+    display:flex; 
+    flex-direction:row;
+    justify-content: space-around;
+    padding:10px; 
+    margin-bottom:15px;
+    background-color: #ecf0f1;
+}
+
+
+
+
 /* The Modal (background) */
 .addModal {
     display: none; /* Hidden by default */

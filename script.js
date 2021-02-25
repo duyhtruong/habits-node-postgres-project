@@ -6,34 +6,56 @@ async function displayAllUsers(){
     let response = await fetch('http://localhost:3000/users/');
     let data = await response.json();
     data.map(function(row){
-        let firstName = document.createElement('p');
-        let email = document.createElement('p');
-
+        let userBody = document.createElement('DIV');
+        let firstName = document.createElement('P');
+        let email = document.createElement('P');
+        let deleteButton = document.createElement('BUTTON');
+        
+        let userID = row.id;
+        deleteButton.addEventListener("click", function(){deleteUser(userID)},false);
+        //deleteButton.onclick = deleteUser(userID);
         firstName.innerHTML = row.name;
         email.innerHTML = row.email;
 
-        main_body.appendChild(firstName);
-        main_body.appendChild(email);
+        deleteButton.innerHTML = 'X';
+
+        userBody.classList.add('body--user-card')
+
+
+        userBody.appendChild(firstName);
+        userBody.appendChild(email);
+        userBody.appendChild(deleteButton);
+        main_body.appendChild(userBody);
+    
     })
 
 }
 displayAllUsers();
 
-function addNewUser(){
-    
-fetch("http://localhost:3000/users/",{
-    method: "POST",
-    headers:{
-        "Accept": "application/json",
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-        name: "testing",
-        email: "testing@gmail.com"
-    })
-})
-   
+function addNewUser() {
 
+    fetch("http://localhost:3000/users/", {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name: "testing",
+            email: "testing@gmail.com"
+        })
+    })
+}
+
+function deleteUser(id){
+    let deleteURL = 'http://localhost:3000/users/' + id;
+    fetch(deleteURL,{
+        method: "DELETE",
+        headers: {
+            "Accept": "application/json",
+            'Content-Type': 'application/json'
+        }
+    })
 }
 
 
