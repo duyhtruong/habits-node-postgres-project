@@ -21,6 +21,8 @@
     </div>
     <div id='main-body'></div>
     <button id="addBtn">Add New User</button>
+
+    <!--Add Modal Start-->
     <div id="addModal" class="addModal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -36,6 +38,25 @@
         </div>
         
     </div>
+    <!--Add Modal End-->
+
+    <!--View Single Modal Start-->
+    <div id="viewSingleUserModal" class="viewModal">
+        <div class="modal-content">
+            <span class="viewClose">&times;</span>
+            <p>Edit User</p>
+            <form onsubmit="addNewUser();return false">
+                <label for="addFName">First Name:</label><br>
+                <input type="text" id="editFName" name="editFName"><br>
+                <label for="addEmail">Email:</label><br>
+                <input type="text" id="editEmail" name="editEmail"><br>
+                <input type="submit" value="Submit">
+            </form>
+            
+        </div>
+        
+    </div>
+    <!--View Single Modal End-->
 
     <script src="script.js"></script>
 </body>

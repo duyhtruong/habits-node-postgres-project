@@ -10,7 +10,10 @@ async function displayAllUsers(){
         let firstName = document.createElement('P');
         let email = document.createElement('P');
         let deleteButton = document.createElement('BUTTON');
-        
+        let viewSingleButton = document.createElement('BUTTON');
+        viewSingleButton.id = "viewSingleBtn";
+        viewSingleButton.onclick = function(){viewSingleUser()};
+
         let userID = row.id;
         deleteButton.addEventListener("click", function(){deleteUser(userID)},false);
         //deleteButton.onclick = deleteUser(userID);
@@ -18,6 +21,7 @@ async function displayAllUsers(){
         email.innerHTML = row.email;
 
         deleteButton.innerHTML = 'X';
+        viewSingleButton.innerHTML = 'edit';
 
         userBody.classList.add('body--user-card')
 
@@ -25,6 +29,7 @@ async function displayAllUsers(){
         userBody.appendChild(firstName);
         userBody.appendChild(email);
         userBody.appendChild(deleteButton);
+        userBody.appendChild(viewSingleButton);
         main_body.appendChild(userBody);
     
     })
@@ -60,17 +65,24 @@ function deleteUser(id){
     })
 }
 
+function viewSingleUser(){
+    viewModal.style.display = "block";
+}
+
 
 // ADD NEW USER MODAL
 
 // Get the modal
 var modal = document.getElementById("addModal");
+var viewModal = document.getElementById("viewSingleUserModal");
 
 // Get the button that opens the modal
 var addBtn = document.getElementById("addBtn");
+var viewSingleBtn = document.getElementById("viewSingleBtn");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
+var spanView = document.getElementsByClassName("viewClose")[0];
 
 // When the user clicks on the button, open the modal
 addBtn.onclick = function() {
@@ -82,9 +94,19 @@ span.onclick = function() {
   modal.style.display = "none";
 }
 
+spanView.onclick = function(){
+    viewModal.style.display="none";
+}
+
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
+window.onclick = function(event){
+    if(event.target == modal){
+        modal.style.display="none"; 
   }
+}
+
+window.onclick = function(event){
+    if(event.target == viewModal){
+        viewModal.style.display="none";
+    }
 }
