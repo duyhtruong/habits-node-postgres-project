@@ -67,7 +67,7 @@ function deleteUser(id){
     })
 }
 
-//Function to view a single user
+//Function to view a single user's modal
 function viewSingleUser(userID,userName,userEmail){
     viewModal.style.display = "block";
     console.log(userID)
@@ -77,9 +77,31 @@ function viewSingleUser(userID,userName,userEmail){
     editEmailValue.value = userEmail;
     editUserValue.placeholder = userName;
     editEmailValue.placeholder = userEmail;
+    let editForm = document.getElementById('editForm');
+    editForm.onsubmit = function(){editUser(userID)};
 
 
 }
+
+function editUser(userID){
+    let newUserValue = document.getElementById("editFName").value;
+    let newEmailValue = document.getElementById("editEmail").value;
+    let editURL = 'http://localhost:3000/users/' + userID;
+
+    fetch(editURL, {
+        method: "PUT",
+        headers:{
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name: newUserValue,
+            email: newEmailValue
+        })
+    })
+
+}
+
 
 
 

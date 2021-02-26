@@ -1,3 +1,5 @@
+const { response } = require('express');
+
 const Pool = require('pg').Pool
 const pool = new Pool({
     user: 'me',
@@ -58,6 +60,7 @@ const createUser = function (req, res) {
 }
 
 //PUT updated data in an existing user
+/*
 const updateUser = (request, response)=>{
     const id = parseInt(request.params.id)
     const { name, email } = request.body
@@ -72,6 +75,21 @@ const updateUser = (request, response)=>{
             response.status(200).send(`User modified with ID: ${id}`)
         }
     )
+}*/
+
+const updateUser = function(req,res){
+    const id = parseInt(req.params.id);
+    const name = req.body.name;
+    const email = req.body.email;
+
+    pool.query('UPDATE users SET name = $1, email = $2 WHERE id = $3',[name, email, id], function(error, results){
+        if (error){
+            throw error
+        }
+        else{
+            return res.send({message: 'User modified with ID'})
+        }
+    })
 }
 
 //DELETE user
