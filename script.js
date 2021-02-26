@@ -6,23 +6,23 @@ async function displayAllUsers(){
     let response = await fetch('http://localhost:3000/users/');
     let data = await response.json();
     data.map(function(row){
-        let userBody = document.createElement('DIV');
-        let firstName = document.createElement('P');
-        let email = document.createElement('P');
+        let userBody = document.createElement('DIV'),
+            firstName = document.createElement('P'),
+            email = document.createElement('P');
+            let userID = row.id;
+
         let deleteButton = document.createElement('BUTTON');
+            deleteButton.addEventListener("click", function(){deleteUser(userID)},false);
+            deleteButton.innerHTML = 'X';
+
         let viewSingleButton = document.createElement('BUTTON');
         viewSingleButton.id = "viewSingleBtn";
-        viewSingleButton.onclick = function(){viewSingleUser()};
-
-        let userID = row.id;
-        deleteButton.addEventListener("click", function(){deleteUser(userID)},false);
-        //deleteButton.onclick = deleteUser(userID);
-        firstName.innerHTML = row.name;
-        email.innerHTML = row.email;
-
-        deleteButton.innerHTML = 'X';
+        viewSingleButton.onclick = function(){viewSingleUser(userID,row.name,row.email)};
         viewSingleButton.innerHTML = 'edit';
 
+
+        firstName.innerHTML = row.name;
+        email.innerHTML = row.email;
         userBody.classList.add('body--user-card')
 
 
@@ -37,6 +37,7 @@ async function displayAllUsers(){
 }
 displayAllUsers();
 
+//Function to add new users
 function addNewUser() {
     let userInputName = document.getElementById('addFName').value;
     let userInputEmail = document.getElementById('addEmail').value;
@@ -54,6 +55,7 @@ function addNewUser() {
     })
 }
 
+//Function to delete users
 function deleteUser(id){
     let deleteURL = 'http://localhost:3000/users/' + id;
     fetch(deleteURL,{
@@ -65,9 +67,21 @@ function deleteUser(id){
     })
 }
 
-function viewSingleUser(){
+//Function to view a single user
+function viewSingleUser(userID,userName,userEmail){
     viewModal.style.display = "block";
+    console.log(userID)
+    let editUserValue = document.getElementById("editFName");
+    let editEmailValue = document.getElementById("editEmail");
+    editUserValue.value = userName;
+    editEmailValue.value = userEmail;
+    editUserValue.placeholder = userName;
+    editEmailValue.placeholder = userEmail;
+
+
 }
+
+
 
 
 // ADD NEW USER MODAL
