@@ -33,6 +33,8 @@ async function displayAllUsers(){
 displayAllUsers();
 
 function addNewUser() {
+    let userInputName = document.getElementById('addFName').value;
+    let userInputEmail = document.getElementById('addEmail').value;
 
     fetch("http://localhost:3000/users/", {
         method: "POST",
@@ -41,8 +43,8 @@ function addNewUser() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            name: "testing",
-            email: "testing@gmail.com"
+            name: userInputName,
+            email: userInputEmail
         })
     })
 }
