@@ -1,41 +1,51 @@
 let main_body = document.getElementById("main-body");
 
+//create Element
+function create(x){
+    return document.createElement(x);
+}
 
 //Display All Users
 async function displayAllUsers(){
     let response = await fetch('http://localhost:3000/users/');
     let data = await response.json();
     data.map(function(row){
-        let userBody = document.createElement('DIV'),
-            firstName = document.createElement('P'),
-            email = document.createElement('P');
-            let userID = row.id;
+        let userBody = create('DIV');
+            userBody.classList.add('body--user-card');
+        let firstName = create('P');
+            firstName.innerHTML = row.name;
+        let email = create('P');
+            email.innerHTML = row.email;
+        let userID = row.id;
 
-        let deleteButton = document.createElement('BUTTON');
-            deleteButton.addEventListener("click", function(){deleteUser(userID)},false);
+        let deleteButton = create('BUTTON');
             deleteButton.innerHTML = 'X';
+            deleteButton.onclick = function(){deleteUser(userID)};
+           
+        let viewSingleButton = create('BUTTON');
+            viewSingleButton.innerHTML = 'edit';
+            viewSingleButton.id = "viewSingleBtn";
+            viewSingleButton.onclick = function(){viewSingleUser(userID,row.name,row.email)};
+           
 
-        let viewSingleButton = document.createElement('BUTTON');
-        viewSingleButton.id = "viewSingleBtn";
-        viewSingleButton.onclick = function(){viewSingleUser(userID,row.name,row.email)};
-        viewSingleButton.innerHTML = 'edit';
+        let addHabitsButton = create('DIV');
+            addHabitsButton.innerHTML = 'add new habit';
 
-
-        firstName.innerHTML = row.name;
-        email.innerHTML = row.email;
-        userBody.classList.add('body--user-card')
-
+        
 
         userBody.appendChild(firstName);
         userBody.appendChild(email);
         userBody.appendChild(deleteButton);
         userBody.appendChild(viewSingleButton);
+        userBody.appendChild(addHabitsButton);
         main_body.appendChild(userBody);
     
     })
 
 }
 displayAllUsers();
+
+
 
 //Function to add new users
 function addNewUser() {
