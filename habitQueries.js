@@ -11,23 +11,33 @@ const habitPool = new Pool({
 
 //GET all habits
 const getHabits = (req, res) => {
-
+    res.json({
+        info:'This is the user habits page'
+    })
 }
 
 const getHabitByID = (req, res) => {
-
+    res.json({
+        info:'This is the individual user habits page'
+    })
 }
 
 const createHabit = (req, res) => {
-
+    res.json({
+        info:'This is the createHabit Page'
+    })
 }
 
 const updateHabit = (req, res) => {
-
+    res.json({
+        info: 'This is the updateHabit page'
+    })
 }
 
 const deleteHabit = (req, res) => {
-
+    res.json({
+        info:'This is the deleteHabit Page'
+    })
 }
 
 module.exports = {
