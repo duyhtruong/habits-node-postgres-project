@@ -28,8 +28,9 @@ async function displayAllUsers(){
             viewSingleButton.onclick = function(){viewSingleUser(userID,row.name,row.email)};
            
 
-        let addHabitsButton = create('DIV');
+        let addHabitsButton = create('BUTTON');
             addHabitsButton.innerHTML = 'add new habit';
+            addHabitsButton.onclick = function(){};
 
         
 
@@ -45,6 +46,22 @@ async function displayAllUsers(){
 }
 displayAllUsers();
 
+//Function to add new Habits
+function addNewHabit(userid){
+    let userInputHabit = document.getElementById('addHabitName').value;
+    let addNewHabitURL = "http://localhost:3000/habits/" + userid;
+
+    fetch(addNewHabitURL, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify({
+            habitName: userInputHabit
+        })
+    })
+}
 
 
 //Function to add new users
