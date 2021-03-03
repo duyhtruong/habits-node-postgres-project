@@ -30,7 +30,10 @@ async function displayAllUsers(){
 
         let addHabitsButton = create('BUTTON');
             addHabitsButton.innerHTML = 'add new habit';
-            addHabitsButton.onclick = function(){};
+            addHabitsButton.id = "addHabitBtn";
+            addHabitsButton.onclick = function(){
+                addHabitModal.style.display = "block";
+            }
 
         
 
@@ -45,6 +48,8 @@ async function displayAllUsers(){
 
 }
 displayAllUsers();
+
+
 
 //Function to add new Habits
 function addNewHabit(userid){
@@ -138,19 +143,27 @@ function editUser(userID){
 // Get the modal
 var modal = document.getElementById("addModal");
 var viewModal = document.getElementById("viewSingleUserModal");
+var addHabitModal = document.getElementById("addHabitModal");
 
 // Get the button that opens the modal
 var addBtn = document.getElementById("addBtn");
 var viewSingleBtn = document.getElementById("viewSingleBtn");
+var addHabit = document.getElementById("addHabitBtn");
+
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 var spanView = document.getElementsByClassName("viewClose")[0];
+var spanHabit = document.getElementsByClassName("habitClose")[0];
 
 // When the user clicks on the button, open the modal
 addBtn.onclick = function() {
   modal.style.display = "block";
 }
+
+//addHabit.onclick = function(){
+ //   addHabitModal.style.display = "block";
+//}
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
@@ -161,6 +174,10 @@ spanView.onclick = function(){
     viewModal.style.display="none";
 }
 
+spanHabit.onclick = function(){
+    addHabitModal.style.display="none";
+}
+
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event){
     if(event.target == modal){
@@ -168,5 +185,8 @@ window.onclick = function(event){
   }
   if(event.target == viewModal){
       viewModal.style.display="none";
+  }
+  if(event.target == addHabitModal){
+      addHabitModal.style.display="none";
   }
 }
