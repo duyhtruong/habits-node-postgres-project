@@ -11,9 +11,16 @@ const habitPool = new Pool({
 
 //GET all habits
 const getHabits = (req, res) => {
-    res.json({
-        info:'This is the user habits page'
+    let userid = parseInt(req.params.id)
+
+    habitPool.query('SELECT * FROM habits WHERE user_id = $1', [userid], (error,results)=>{
+        if(error){
+            throw error
+        }else{
+            res.status(200).json(results.rows)
+        }
     })
+    
 }
 
 const getHabitByID = (req, res) => {
@@ -23,8 +30,16 @@ const getHabitByID = (req, res) => {
 }
 
 const createHabit = (req, res) => {
-    res.json({
-        info:'This is the createHabit Page'
+    let habitName = req.body.habitName;
+    let userid = parseInt(req.params.id);
+    
+    habitPool.query('INSERT INTO habits (habit_name, user_id) VALUES ($1, $2) RETURNING habit_id', [habitName, userid], 
+    (error, results)=>{
+        if(error){
+            throw error;
+        }else{
+            return res.send({message: 'New Habit Added!'})
+        }
     })
 }
 
