@@ -2,7 +2,7 @@ const { response } = require('express');
 
 const Pool = require('pg').Pool
 const habitPool = new Pool({
-    user: 'me',
+    user: 'duytruong',
     host:  'localhost',
     database: 'api',
     password: 'password',
@@ -15,7 +15,7 @@ const getHabits = (req, res) => {
 
     habitPool.query('SELECT * FROM habits WHERE user_id = $1', [userid], (error,results)=>{
         if(error){
-            throw error
+            throw error;
         }else{
             res.status(200).json(results.rows)
         }
@@ -23,15 +23,21 @@ const getHabits = (req, res) => {
     
 }
 
-const getAllHabits = (req,res)=>{
-    habitPool.query('SELECT * FROM habits ORDER BY id ASC', (err,results)=>{
-        if(err){
-            return err
-        } else{
-            return res.send(results.rows);
+
+
+const getAllHabits = (request, response) => {
+    habitPool.query('SELECT * FROM habits ORDER BY habit_id ASC', function (error, results){
+        if (error){
+            throw error;
+        }else{
+            return response.send(results.rows);
         }
+        //return response.status(200).json(results.rows)
+        //return response.send({error: false, data: results});
     })
 }
+
+
 
 const getHabitByID = (req, res) => {
     res.json({

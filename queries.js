@@ -75,6 +75,8 @@ const deleteUser = function(req,res){
     })
 }
 
+
+
 //export functions by creating an object of functions that can be accessed by index.js
 module.exports = {
     getUsers,

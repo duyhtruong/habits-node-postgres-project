@@ -5,6 +5,7 @@ const port = 3000
 const db = require('./queries')
 const habitDB = require('./habitQueries')
 const cors = require("cors")
+const { response } = require('express')
 
 app.use(cors())
 //body-parser simplifies request by parsing the raw request body and giving you req.body
@@ -30,6 +31,7 @@ app.post('/users', db.createUser)
 app.put('/users/:id', db.updateUser)
 app.delete('/users/:id', db.deleteUser)
 
+app.get('/habits', habitDB.getAllHabits)
 app.get('/habits/:userid', habitDB.getHabits)
 app.get('/habits/:userid/:id', habitDB.getHabitByID)
 app.post('/habits/:userid', habitDB.createHabit)

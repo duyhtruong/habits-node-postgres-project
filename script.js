@@ -34,8 +34,9 @@ async function displayAllUsers(){
             addHabitsButton.innerHTML = 'add new habit';
             addHabitsButton.id = "addHabitBtn";
             addHabitsButton.onclick = function(){
-                addHabitModal.style.display = "block";
+                submitAddNewHabit(userID);
             }
+            
 
         
 
@@ -52,17 +53,37 @@ async function displayAllUsers(){
 displayAllUsers();
 
 async function displayAllHabits(){
-    let response = await fetch('http://localhost:3000/habits/');
+    let response = await fetch('http://localhost:3000/habits');
     let data = await response.json();
 
     data.map(function(row){
-        
+        let allHabitsBody = create('DIV');
+            allHabitsBody.classList.add('body--user-card');
 
+        let habit_id = create('P');
+            habit_id.innerHTML(row.habit_id);
 
-        habitsContainer.appendChild();
+        let habit_name = create('P');
+            habit_name.innerHTML(rows.habit_name);
+
+        let user_id = create('P');
+            user_id.innerHTML(rows.habit_id);
+
+        allHabitsBody.appendChild(habit_id);
+        allHabitsBody.appendChild(habit_name);
+        allHabitsBody.appendChild(user_id);
+        habitsContainer.appendChild(allHabitsBody);
     })
 }
 
+displayAllHabits();
+
+//
+function submitAddNewHabit(userid){
+    addHabitModal.style.display="block";
+    let addNewHabitForm = document.getElementById('addHabitForm');
+    addNewHabitForm.onsubmit(function(){addNewHabit(userid)});
+}
 
 //Function to add new Habits
 function addNewHabit(userid){
@@ -80,6 +101,8 @@ function addNewHabit(userid){
         })
     })
 }
+
+
 
 
 //Function to add new users
