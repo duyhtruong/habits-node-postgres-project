@@ -23,6 +23,16 @@ const getHabits = (req, res) => {
     
 }
 
+const getAllHabits = (req,res)=>{
+    habitPool.query('SELECT * FROM habits ORDER BY id ASC', (err,results)=>{
+        if(err){
+            return err
+        } else{
+            return res.send(results.rows);
+        }
+    })
+}
+
 const getHabitByID = (req, res) => {
     res.json({
         info:'This is the individual user habits page'
@@ -57,6 +67,7 @@ const deleteHabit = (req, res) => {
 
 module.exports = {
     getHabits,
+    getAllHabits,
     getHabitByID,
     createHabit,
     updateHabit,

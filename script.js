@@ -1,4 +1,6 @@
 let main_body = document.getElementById("main-body");
+let habitsContainer = document.getElementById("habitsContainer");
+
 
 //create Element
 function create(x){
@@ -49,6 +51,17 @@ async function displayAllUsers(){
 }
 displayAllUsers();
 
+async function displayAllHabits(){
+    let response = await fetch('http://localhost:3000/habits/');
+    let data = await response.json();
+
+    data.map(function(row){
+        
+
+
+        habitsContainer.appendChild();
+    })
+}
 
 
 //Function to add new Habits
