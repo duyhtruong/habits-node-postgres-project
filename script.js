@@ -61,13 +61,13 @@ async function displayAllHabits(){
             allHabitsBody.classList.add('body--user-card');
 
         let habit_id = create('P');
-            habit_id.innerHTML(row.habit_id);
+            habit_id.innerHTML = row.habit_id;
 
         let habit_name = create('P');
-            habit_name.innerHTML(rows.habit_name);
+            habit_name.innerHTML = row.habit_name;
 
         let user_id = create('P');
-            user_id.innerHTML(rows.habit_id);
+            user_id.innerHTML = row.habit_id;
 
         allHabitsBody.appendChild(habit_id);
         allHabitsBody.appendChild(habit_name);
@@ -82,7 +82,7 @@ displayAllHabits();
 function submitAddNewHabit(userid){
     addHabitModal.style.display="block";
     let addNewHabitForm = document.getElementById('addHabitForm');
-    addNewHabitForm.onsubmit(function(){addNewHabit(userid)});
+    addNewHabitForm.onsubmit = function(){addNewHabit(userid)};
 }
 
 //Function to add new Habits
