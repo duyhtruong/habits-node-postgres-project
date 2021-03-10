@@ -67,7 +67,7 @@ async function displayAllHabits(){
             habit_name.innerHTML = row.habit_name;
 
         let user_id = create('P');
-            user_id.innerHTML = row.habit_id;
+            user_id.innerHTML = row.user_id;
 
         allHabitsBody.appendChild(habit_id);
         allHabitsBody.appendChild(habit_name);
@@ -97,7 +97,8 @@ function addNewHabit(userid){
             "Content-Type": 'application/json'
         },
         body: JSON.stringify({
-            habitName: userInputHabit
+            habitName: userInputHabit,
+            userid : userid
         })
     })
 }

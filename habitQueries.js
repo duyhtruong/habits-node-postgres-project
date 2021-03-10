@@ -47,7 +47,7 @@ const getHabitByID = (req, res) => {
 
 const createHabit = (req, res) => {
     let habitName = req.body.habitName;
-    let userid = parseInt(req.params.id);
+    let userid = req.body.userid;
     
     habitPool.query('INSERT INTO habits (habit_name, user_id) VALUES ($1, $2) RETURNING habit_id', [habitName, userid], 
     (error, results)=>{
