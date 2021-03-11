@@ -33,9 +33,7 @@ async function displayAllUsers(){
         let addHabitsButton = create('BUTTON');
             addHabitsButton.innerHTML = 'add new habit';
             addHabitsButton.id = "addHabitBtn";
-            addHabitsButton.onclick = function(){
-                submitAddNewHabit(userID);
-            }
+            addHabitsButton.onclick = function(){submitAddNewHabit(userID)};
             
 
         
@@ -51,6 +49,9 @@ async function displayAllUsers(){
 
 }
 displayAllUsers();
+
+
+//********            Habits Functions         *************//
 
 async function displayAllHabits(){
     let response = await fetch('http://localhost:3000/habits');
@@ -85,6 +86,22 @@ async function displayAllHabits(){
 
 displayAllHabits();
 
+let testAddHabitButton = document.getElementById('testingAddHabit');
+    testAddHabitButton.onclick = function(){
+        fetch("http://localhost:3000/habits/42",{
+            method: "POST",
+            headers:{
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                habitName: 'Running',
+                userid: 42
+            })
+        })
+    }
+
+
 //
 function submitAddNewHabit(userid){
     addHabitModal.style.display="block";
@@ -93,11 +110,11 @@ function submitAddNewHabit(userid){
 }
 
 //Function to add new Habits
-function addNewHabit(userid){
+function addNewHabit(user_id){
     let userInputHabit = document.getElementById('addHabitName').value;
-    let addNewHabitURL = "http://localhost:3000/habits/" + userid;
+    let addNewHabitURL = "http://localhost:3000/habits/" + user_id;
 
-    fetch('http://localhost:3000/habits/40', {
+    fetch(addNewHabitURL, {
         method: "POST",
         headers: {
             "Accept": "application/json",
@@ -105,7 +122,7 @@ function addNewHabit(userid){
         },
         body: JSON.stringify({
             habitName: userInputHabit,
-            userid : userid
+            userid : user_id
         })
     })
 }
@@ -122,6 +139,9 @@ function deleteHabit(habit_id){
     })
 }
 
+
+
+//********     User Functions         *************//
 
 //Function to add new users
 function addNewUser() {
@@ -191,7 +211,7 @@ function editUser(userID){
 
 
 
-
+//********     Modal        *************//
 // ADD NEW USER MODAL
 
 // Get the modal
