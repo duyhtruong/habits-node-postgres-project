@@ -33,7 +33,7 @@ async function displayAllUsers(){
         let addHabitsButton = create('BUTTON');
             addHabitsButton.innerHTML = 'add new habit';
             addHabitsButton.id = "addHabitBtn";
-            addHabitsButton.onclick = function(){submitAddNewHabit(userID)};
+            addHabitsButton.onclick = function(){submitAddNewHabit()};
             
 
         
@@ -103,12 +103,23 @@ let testAddHabitButton = document.getElementById('testingAddHabit');
 
 
 //
-function submitAddNewHabit(userid){
-    addHabitModal.style.display="block";
-    let addNewHabitForm = document.getElementById('addHabitForm');
-    addNewHabitForm.onsubmit = function(){addNewHabit(userid)};
+function submitAddNewHabit(){
+    addHabitModal.style.display = "block";
+    let addHabitForm = document.getElementById('addHabitForm');
+    addHabitForm.onsubmit = function(){
+        fetch("http://localhost:3000/habits/42",{
+            method: "POST",
+            headers:{
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                habitName: 'Running',
+                userid: 42
+            })
+        })
+    }
 }
-
 //Function to add new Habits
 function addNewHabit(user_id){
     let userInputHabit = document.getElementById('addHabitName').value;
