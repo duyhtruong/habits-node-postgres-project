@@ -69,7 +69,7 @@ const updateHabit = (req, res) => {
 const deleteHabit = (req, res) => {
     const id = parseInt(req.params.id)
 
-    pool.query('DELETE FROM habits WHERE habit_id = $1', [id], function(error, results){
+    habitPool.query('DELETE FROM habits WHERE habit_id = $1', [id], function(error, results){
         if(error){
             throw error;
         }else{

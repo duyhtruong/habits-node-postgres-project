@@ -36,5 +36,5 @@ app.get('/habits/:userid', habitDB.getHabits)
 app.get('/habits/:userid/:id', habitDB.getHabitByID)
 app.post('/habits/:userid', habitDB.createHabit)
 app.put('/habits/:userid/:id', habitDB.updateHabit)
-app.delete('/habits/:id', habitDB.updateHabit)
+app.delete('/habits/:id', habitDB.deleteHabit)
 
