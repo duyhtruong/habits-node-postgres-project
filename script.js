@@ -69,9 +69,16 @@ async function displayAllHabits(){
         let user_id = create('P');
             user_id.innerHTML = row.user_id;
 
+        let deleteButton = create('BUTTON');
+            deleteButton.innerHTML = 'X';
+            deleteButton.onclick = function(){
+                deleteHabit(row.habit_id);
+            }
+
         allHabitsBody.appendChild(habit_id);
         allHabitsBody.appendChild(habit_name);
         allHabitsBody.appendChild(user_id);
+        allHabitsBody.appendChild(deleteButton);
         habitsContainer.appendChild(allHabitsBody);
     })
 }
@@ -90,7 +97,7 @@ function addNewHabit(userid){
     let userInputHabit = document.getElementById('addHabitName').value;
     let addNewHabitURL = "http://localhost:3000/habits/" + userid;
 
-    fetch(addNewHabitURL, {
+    fetch('http://localhost:3000/habits/40', {
         method: "POST",
         headers: {
             "Accept": "application/json",
@@ -103,7 +110,17 @@ function addNewHabit(userid){
     })
 }
 
-
+//Function to delete Habits
+function deleteHabit(habit_id){
+    let deleteURL = 'http://localhost:3000/habits/' + habit_id;
+    fetch(deleteURL,{
+        method: "DELETE",
+        headers: {
+            "Accept": "application/json",
+            'Content-Type': 'application/json'
+        }
+    })
+}
 
 
 //Function to add new users

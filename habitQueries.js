@@ -47,9 +47,10 @@ const getHabitByID = (req, res) => {
 
 const createHabit = (req, res) => {
     let habitName = req.body.habitName;
-    let userid = req.body.userid;
+    //let userid = req.body.userid;
+    const id = parseInt(request.params.id)
     
-    habitPool.query('INSERT INTO habits (habit_name, user_id) VALUES ($1, $2) RETURNING habit_id', [habitName, userid], 
+    habitPool.query('INSERT INTO habits (habit_name, user_id) VALUES ($1, $2) RETURNING habit_id', [habitName, id], 
     (error, results)=>{
         if(error){
             throw error;
@@ -66,8 +67,14 @@ const updateHabit = (req, res) => {
 }
 
 const deleteHabit = (req, res) => {
-    res.json({
-        info:'This is the deleteHabit Page'
+    const id = parseInt(req.params.id)
+
+    pool.query('DELETE FROM habits WHERE habit_id = $1', [id], function(error, results){
+        if(error){
+            throw error;
+        }else{
+            return res.send(`User deleted with ID: ${id}`);
+        }
     })
 }
 
