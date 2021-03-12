@@ -141,7 +141,7 @@ function viewSingleUser(userID,userName,userEmail){
 function editUser(userID){
     let newUserValue = document.getElementById("editFName").value;
     let newEmailValue = document.getElementById("editEmail").value;
-    let editURL = 'http://localhost:3000/users/' + userID;
+    let editURL = 'http://localhost:3000/users/' + userID.toString();
 
     fetch(editURL, {
         method: "PUT",
