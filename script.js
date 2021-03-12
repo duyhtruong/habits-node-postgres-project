@@ -33,7 +33,8 @@ async function displayAllUsers(){
         let addHabitsButton = create('BUTTON');
             addHabitsButton.innerHTML = 'add new habit';
             addHabitsButton.id = "addHabitBtn";
-            addHabitsButton.onclick = function(){submitAddNewHabit()};
+            addHabitsButton.onclick = function(){addHabitModal.style.display = "block"};
+            //addHabitsButton.onclick = function(){submitAddNewHabit()};
             
 
         
@@ -104,7 +105,7 @@ let testAddHabitButton = document.getElementById('testingAddHabit');
 
 //
 function submitAddNewHabit(){
-    addHabitModal.style.display = "block";
+    //addHabitModal.style.display = "block";
     let addHabitForm = document.getElementById('addHabitForm');
     addHabitForm.onsubmit = function(){
         fetch("http://localhost:3000/habits/42",{
