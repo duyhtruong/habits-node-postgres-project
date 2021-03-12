@@ -24,7 +24,6 @@ const getHabits = (req, res) => {
 }
 
 
-
 const getAllHabits = (request, response) => {
     habitPool.query('SELECT * FROM habits ORDER BY habit_id ASC', function (error, results){
         if (error){
@@ -36,7 +35,6 @@ const getAllHabits = (request, response) => {
         //return response.send({error: false, data: results});
     })
 }
-
 
 
 const getHabitByID = (req, res) => {

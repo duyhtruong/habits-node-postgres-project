@@ -30,20 +30,10 @@ async function displayAllUsers(){
             viewSingleButton.onclick = function(){viewSingleUser(userID,row.name,row.email)};
            
 
-        let addHabitsButton = create('BUTTON');
-            addHabitsButton.innerHTML = 'add new habit';
-            addHabitsButton.id = "addHabitBtn";
-            addHabitsButton.onclick = function(){addHabitModal.style.display = "block"};
-            //addHabitsButton.onclick = function(){submitAddNewHabit()};
-            
-
-        
-
         userBody.appendChild(firstName);
         userBody.appendChild(email);
         userBody.appendChild(deleteButton);
         userBody.appendChild(viewSingleButton);
-        userBody.appendChild(addHabitsButton);
         main_body.appendChild(userBody);
     
     })
@@ -87,57 +77,6 @@ async function displayAllHabits(){
 
 displayAllHabits();
 
-let testAddHabitButton = document.getElementById('testingAddHabit');
-    testAddHabitButton.onclick = function(){
-        fetch("http://localhost:3000/habits/42",{
-            method: "POST",
-            headers:{
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                habitName: 'Running',
-                userid: 42
-            })
-        })
-    }
-
-
-//
-function submitAddNewHabit(){
-    //addHabitModal.style.display = "block";
-    let addHabitForm = document.getElementById('addHabitForm');
-    addHabitForm.onsubmit = function(){
-        fetch("http://localhost:3000/habits/42",{
-            method: "POST",
-            headers:{
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                habitName: 'Running',
-                userid: 42
-            })
-        })
-    }
-}
-//Function to add new Habits
-function addNewHabit(user_id){
-    let userInputHabit = document.getElementById('addHabitName').value;
-    let addNewHabitURL = "http://localhost:3000/habits/" + user_id;
-
-    fetch(addNewHabitURL, {
-        method: "POST",
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            habitName: userInputHabit,
-            userid : user_id
-        })
-    })
-}
 
 //Function to delete Habits
 function deleteHabit(habit_id){
@@ -150,8 +89,6 @@ function deleteHabit(habit_id){
         }
     })
 }
-
-
 
 //********     User Functions         *************//
 
@@ -229,18 +166,18 @@ function editUser(userID){
 // Get the modal
 var modal = document.getElementById("addModal");
 var viewModal = document.getElementById("viewSingleUserModal");
-var addHabitModal = document.getElementById("addHabitModal");
+
 
 // Get the button that opens the modal
 var addBtn = document.getElementById("addBtn");
 var viewSingleBtn = document.getElementById("viewSingleBtn");
-var addHabit = document.getElementById("addHabitBtn");
+
 
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 var spanView = document.getElementsByClassName("viewClose")[0];
-var spanHabit = document.getElementsByClassName("habitClose")[0];
+
 
 // When the user clicks on the button, open the modal
 addBtn.onclick = function() {
@@ -260,9 +197,6 @@ spanView.onclick = function(){
     viewModal.style.display="none";
 }
 
-spanHabit.onclick = function(){
-    addHabitModal.style.display="none";
-}
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event){
@@ -271,8 +205,5 @@ window.onclick = function(event){
   }
   if(event.target == viewModal){
       viewModal.style.display="none";
-  }
-  if(event.target == addHabitModal){
-      addHabitModal.style.display="none";
   }
 }
